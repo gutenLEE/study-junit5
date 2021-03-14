@@ -1,4 +1,4 @@
 package com.guten.myinflearnjavatest;
 
-public class fff {
+public class Study {
 }

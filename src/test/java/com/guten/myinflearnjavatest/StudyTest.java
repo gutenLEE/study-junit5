@@ -1,6 +1,8 @@
 package com.guten.myinflearnjavatest;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+import org.junit.jupiter.api.condition.EnabledOnOs;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,40 +23,51 @@ class StudyTest {
         assertAll(
                 () -> assertNotNull(study),
                 () -> assertEquals(StudyStatus.DRAFT, study.getStatus(),
-                        ()->"스터디 초기화 상태는 DRAFT여야 한다."),
-                ()-> assertTrue(study.getLimit() > 0,"스터디 최대 참석 인원은 0 보다 커야함")
+                        () -> "스터디 초기화 상태는 DRAFT여야 한다."),
+                () -> assertTrue(study.getLimit() > 0, "스터디 최대 참석 인원은 0 보다 커야함")
 
         );
     }
+
     @Test
-    void how_to_display_test_case_name(){
+    void how_to_display_test_case_name() {
         Study study = new Study();
         assertNotNull(study);
         System.out.println("create test case");
     }
+
     @Test
-    void create1(){
+    void create1() {
         System.out.println("create1 test case");
     }
 
     // private X, return type x
     @BeforeAll
-    static void beforeAll(){
+    static void beforeAll() {
         System.out.println("beforeAll");
     }
 
     @AfterAll
-    static void afterAll(){
+    static void afterAll() {
         System.out.println("afterAll");
     }
 
     // 각각의 테스트를 실행하기 이전에 한 번씩 호출된다.
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         System.out.println("after each");
     }
+
     @AfterEach
-    void afterEach(){
+    void afterEach() {
         System.out.println("before each");
+    }
+
+    @Test
+    @DisplayName("make study group")
+  //  @EnabledOnOs(value = "WINDOW")
+    @EnabledIfEnvironmentVariable(named = "TEST_ENV", matches = "keesun")
+    void create_new_study_again() {
+        System.out.println("cr+eate1");
     }
 }
